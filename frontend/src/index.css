@@ -435,3 +435,64 @@ button {
 .animate-slide-up {
   animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
+
+/* Utilities & Responsive */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Mobile and Tablet Responsiveness */
+@media (max-width: 992px) {
+  /* Navbar */
+  .header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 1rem;
+    justify-content: center !important;
+  }
+  
+  .header .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  
+  .header > div:last-child {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px !important;
+  }
+
+  /* Glass Panels and Dashboard */
+  .glass-panel {
+    padding: 16px !important;
+  }
+  
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Make task columns stack on tablet/mobile */
+  .task-board-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Make Assign form inputs stack */
+  form[style*="flex"] > div {
+    flex: 1 1 100% !important;
+  }
+}
