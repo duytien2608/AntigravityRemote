@@ -55,7 +55,7 @@ export default function Login() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '0 1rem' }}>
       <div className="glass-panel animate-fade-in" style={{ width: '100%', maxWidth: '400px' }}>
         <h2 className="text-gradient" style={{ textAlign: 'center', marginBottom: '2rem' }}>Welcome to Synapse</h2>
 

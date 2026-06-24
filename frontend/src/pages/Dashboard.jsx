@@ -460,14 +460,14 @@ export default function Dashboard() {
   return (
     <div className="container animate-fade-in" style={{ maxWidth: '1000px', marginTop: '2rem' }}>
       <div className="glass-panel animate-slide-up" style={{ animationDelay: '0.1s', padding: '2rem', marginBottom: '2rem', background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="dashboard-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h2>Assign New Task</h2>
           <button onClick={handleDownloadExe} className="btn-secondary" style={{ padding: '8px 16px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
             Tải xuống Synapse Worker (.exe)
           </button>
         </div>
         <form style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1rem' }}>
-          <div style={{ flex: '1 1 300px' }}>
+          <div style={{ flex: '1 1 100%' }}>
             <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Task Description</label>
             <input
               type="text"
@@ -477,7 +477,7 @@ export default function Dashboard() {
               onChange={(e) => setDesc(e.target.value)}
             />
           </div>
-          <div style={{ flex: '1 1 200px' }}>
+          <div style={{ flex: '1 1 100%' }}>
             <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Project Path</label>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               <input
@@ -505,7 +505,7 @@ export default function Dashboard() {
         </form>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', alignItems: 'start' }}>
+      <div className="task-board-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', alignItems: 'start' }}>
         {[
           { id: 'pending', name: 'Pending', color: '#64748b' },
           { id: 'in-progress', name: 'In Progress', color: '#8b5cf6' },
