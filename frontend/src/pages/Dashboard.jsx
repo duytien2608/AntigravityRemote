@@ -429,15 +429,32 @@ export default function Dashboard() {
 
   const handleDownloadExe = async () => {
     if (!currentUser) return;
-    const response = await fetch('/SynapseWorker.exe');
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', `SynapseWorker_${currentUser.uid}.exe`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+      toast.loading('Đang tải và giải nén worker...', { id: 'download_worker' });
+      // Tải file nén .gz từ thư mục public
+      const response = await fetch('/SynapseWorker.exe.gz');
+      if (!response.ok) throw new Error('Không tìm thấy file SynapseWorker.exe.gz');
+
+      // Khởi tạo bộ giải nén ngay trên RAM của trình duyệt
+      const ds = new DecompressionStream('gzip');
+      const decompressedStream = response.body.pipeThrough(ds);
+      
+      // Chuyển stream đã giải nén thành Blob (file .exe nguyên bản)
+      const blob = await new Response(decompressedStream).blob();
+      
+      // Tạo link tải và tự động đổi tên theo UID
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `SynapseWorker_${currentUser.uid}.exe`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast.success('Tải và đổi tên Worker thành công!', { id: 'download_worker' });
+    } catch (err) {
+      console.error(err);
+      toast.error('Lỗi khi tải Worker: ' + err.message, { id: 'download_worker' });
+    }
   };
 
   return (
