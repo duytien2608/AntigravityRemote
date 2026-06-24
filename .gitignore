@@ -1,0 +1,9 @@
+node_modules/
+.env
+dist/
+build/
+.DS_Store
+*.log
+local-worker/temp_screen.jpg
+local-worker/pending_tasks/
+*.exe
