@@ -15,6 +15,7 @@ export default function Dashboard() {
   const [path, setPath] = useState('');
   const [expandedTasks, setExpandedTasks] = useState({});
   const [chatHistories, setChatHistories] = useState({});
+  const [collapsedCols, setCollapsedCols] = useState({});
 
   // States cho Browse Dir
   const [isBrowsing, setIsBrowsing] = useState(false);
@@ -520,15 +521,24 @@ export default function Dashboard() {
               <span style={{ marginLeft: 'auto', background: 'rgba(255,255,255,0.1)', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', color: '#cbd5e1' }}>
                 {tasks.filter(t => col.id === 'in-progress' ? ['in-progress', 'approved'].includes(t.status) : t.status === col.id).length}
               </span>
+              <button 
+                onClick={() => setCollapsedCols(prev => ({ ...prev, [col.id]: !prev[col.id] }))}
+                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '1rem', padding: '0 4px', marginLeft: '8px' }}
+                title={collapsedCols[col.id] ? "Mở rộng" : "Thu nhỏ"}
+              >
+                {collapsedCols[col.id] ? '▼' : '▲'}
+              </button>
             </div>
-            <div className="custom-scrollbar" style={{ display: 'flex', flexDirection: 'column', minHeight: '150px', maxHeight: '700px', overflowY: 'auto', paddingRight: '0.5rem' }}>
+            {!collapsedCols[col.id] && (
+              <div className="custom-scrollbar" style={{ display: 'flex', flexDirection: 'column', minHeight: '150px', maxHeight: '700px', overflowY: 'auto', paddingRight: '0.5rem' }}>
               {tasks.filter(t => col.id === 'in-progress' ? ['in-progress', 'approved'].includes(t.status) : t.status === col.id).map(task => renderTask(task))}
               {tasks.filter(t => col.id === 'in-progress' ? ['in-progress', 'approved'].includes(t.status) : t.status === col.id).length === 0 && (
                 <div style={{ margin: 'auto', textAlign: 'center', color: '#64748b', fontSize: '0.9rem', fontStyle: 'italic', padding: '2rem 0' }}>
                   Không có Task nào
                 </div>
               )}
-            </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
